@@ -19,8 +19,8 @@ template <class T>
 class MessageQueue
 {
 public:
-   void send(T &&msg) const noexcept;
-   T receive() const noexcept;
+   void send(T &&msg) ;
+   T receive() ;
    
 private:
    std::deque<T> _queue;
@@ -47,7 +47,7 @@ public:
     // getters / setters
 
     // typical behaviour methods
-
+   
 private:
     // typical behaviour methods
 
@@ -58,6 +58,7 @@ private:
     std::condition_variable _condition;
     std::mutex _mutex;
     TrafficLightPhase _currentPhase;
+     MessageQueue<TrafficLightPhase> _queue;
 };
 
 #endif
