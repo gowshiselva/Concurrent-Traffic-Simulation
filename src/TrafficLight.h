@@ -41,24 +41,24 @@ class TrafficLight: public TrafficObject
 public:
     // constructor / desctructor
      TrafficLight();
-     void simulate() const noexcept;
-     TrafficLightPhase getCurrentPhase() const noexcept;
-
+     void simulate();
+     TrafficLightPhase getCurrentPhase();
+     void waitForGreen();
     // getters / setters
-
+    
     // typical behaviour methods
    
 private:
     // typical behaviour methods
-
+    void cycleThroughPhases();
     // FP.4b : create a private member of type MessageQueue for messages of type TrafficLightPhase 
     // and use it within the infinite loop to push each new TrafficLightPhase into it by calling 
     // send in conjunction with move semantics.
-    void cycleThroughPhases() const noexcept;
+   
     std::condition_variable _condition;
     std::mutex _mutex;
     TrafficLightPhase _currentPhase;
-     MessageQueue<TrafficLightPhase> _queue;
+    std::shared_ptr<MessageQueue<TrafficLightPhase>> _queue;
 };
 
 #endif
